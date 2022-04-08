@@ -1,5 +1,3 @@
-from pprint import pprint
-from turtle import title
 from requests_html import HTMLSession
 
 
