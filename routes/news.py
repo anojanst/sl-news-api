@@ -39,3 +39,30 @@ async def newsfirstenglish():
 @newsApi.get('/news/newsfirst/sin', tags=['News'])
 async def newsfirstsinhala():
     return news.newsfirstsinhala()
+
+
+@newsApi.get('/news/search/{keyword}', tags=['News'])
+async def search(keyword: str):
+    newsItems = []
+    for n in news.newswire():
+        newsItems.append(n)
+    for n in news.daily_mirror():
+        newsItems.append(n)
+    for n in news.tamil_mirror():
+        newsItems.append(n)
+    for n in news.newsfirsttamil():
+        newsItems.append(n)
+    for n in news.newsfirstsinhala():
+        newsItems.append(n)
+    for n in news.newsfirstenglish():
+        newsItems.append(n)
+
+    result = []
+    for n in newsItems:
+        if keyword in n['title']:
+            result.append(n)
+        else:
+            if keyword in n['description']:
+                result.append(n)
+
+    return result

@@ -19,15 +19,17 @@ class News():
 
             details = a.find('p', first=False)
             i = 0
+            desc = ""
             for d in details:
                 if i == 1:
-                    news_desc = d.text
+                    desc = d.text
                 i += 1
             news = {
                 'title': a.find('h3', first=True).text,
                 'time': a.find('.gtime', first=True).text,
-                'description': news_desc,
-                'link': news_link
+                'description': desc,
+                'link': news_link,
+                'src': 'Daily Mirror'
             }
 
             all_news.append(news)
@@ -56,7 +58,7 @@ class News():
 
                 if a.find('.gtime', first=True):
                     time = a.find('.gtime', first=True).text
-
+                desc = ""
                 if a.find('.ptext', first=True):
                     desc = a.find('.ptext', first=True).text
 
@@ -64,7 +66,8 @@ class News():
                     'title': title,
                     'time': time,
                     'description': desc,
-                    'link': news_link
+                    'link': news_link,
+                    'src': 'Tamil Mirror'
                 }
 
                 all_news.append(news)
@@ -86,6 +89,7 @@ class News():
                 news_link = val
 
             details = a.find('.entry-summary', first=False)
+            desc = ""
             for d in details:
                 if d.find('p', first=True):
                     desc = d.find('p', first=True).text
@@ -93,8 +97,9 @@ class News():
             news = {
                 'title': a.find('h2', first=True).text,
                 'time': a.find('.entry-published', first=True).text,
-                'description': desc,
-                'link': news_link
+                'description': desc.replace("Continue Reading", ""),
+                'link': news_link,
+                'src': 'News Wire'
             }
 
             all_news.append(news)
@@ -124,7 +129,9 @@ class News():
             news = {
                 'title': title,
                 'time': time,
-                'link': news_link
+                'description': '',
+                'link': news_link,
+                'src': 'News First English'
             }
 
             all_news.append(news)
@@ -154,7 +161,9 @@ class News():
             news = {
                 'title': title,
                 'time': time,
-                'link': news_link
+                'description': '',
+                'link': news_link,
+                'src': 'News First Tamil'
             }
 
             all_news.append(news)
@@ -184,7 +193,9 @@ class News():
             news = {
                 'title': title,
                 'time': time,
-                'link': news_link
+                'description': '',
+                'link': news_link,
+                'src': 'News First Sinhala'
             }
 
             all_news.append(news)
