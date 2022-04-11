@@ -59,7 +59,7 @@ async def search(keyword: str):
 
     result = []
     for n in newsItems:
-        if keyword.lowe() in n['title'].lower():
+        if keyword.lower() in n['title'].lower():
             result.append(n)
         else:
             if keyword.lower() in n['description'].lower():
