@@ -1,3 +1,4 @@
+from pprint import pprint
 from requests_html import HTMLSession
 
 
@@ -201,3 +202,71 @@ class News():
             all_news.append(news)
 
         return all_news
+
+    def adaderanaenglish(self):
+
+        session = HTMLSession()
+        url = "http://www.adaderana.lk/hot-news/"
+        r = session.get(url)
+
+        articles = r.html.find('.news-story')
+        all_news = []
+        for a in articles:
+            l = a.find('a', first=True)
+            for val in l.absolute_links:
+                news_link = val
+
+            if a.find('h2', first=True):
+                title = a.find('h2', first=True).text
+
+            if a.find('p', first=True):
+                desc = a.find('p', first=True).text
+
+            if a.find('span', first=True):
+                time = a.find('span', first=True).text
+
+            news = {
+                'title': title,
+                'time': time,
+                'description': desc,
+                'link': news_link,
+                'src': 'Ada Sinhala'
+            }
+
+            all_news.append(news)
+
+        return all_news
+
+    def hiru(self):
+
+        session = HTMLSession()
+        url = "https://www.hirunews.lk/"
+        r = session.get(url)
+
+        articleSection = r.html.find('.main-article-section')
+
+        for section in articleSection:
+            articles = section.find('.middle')
+            all_news = []
+            for a in articles:
+                l = a.find('a', first=True)
+                for val in l.absolute_links:
+                    news_link = val
+
+                if a.find('a', first=True):
+                    title = a.find('a', first=True).text
+
+                if a.find('.middle-tittle-time'):
+                    time = a.find('.middle-tittle-time', first=True).text
+
+                news = {
+                    'title': title,
+                    'time': time,
+                    'description': '',
+                    'link': news_link,
+                    'src': 'Hiru'
+                }
+
+                all_news.append(news)
+
+            return all_news

@@ -41,6 +41,16 @@ async def newsfirstsinhala():
     return news.newsfirstsinhala()
 
 
+@newsApi.get('/news/adaderana/en', tags=['News'])
+async def adaderana():
+    return news.adaderanaenglish()
+
+
+@newsApi.get('/news/hiru', tags=['News'])
+async def hiru():
+    return news.hiru()
+
+
 @newsApi.get('/news/search/{keyword}', tags=['News'])
 async def search(keyword: str):
     newsItems = []
@@ -55,6 +65,10 @@ async def search(keyword: str):
     for n in news.newsfirstsinhala():
         newsItems.append(n)
     for n in news.newsfirstenglish():
+        newsItems.append(n)
+    for n in news.adaderanaenglish():
+        newsItems.append(n)
+    for n in news.hiru():
         newsItems.append(n)
 
     i = 0
