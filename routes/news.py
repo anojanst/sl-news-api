@@ -57,12 +57,17 @@ async def search(keyword: str):
     for n in news.newsfirstenglish():
         newsItems.append(n)
 
+    i = 0
     result = []
     for n in newsItems:
         if keyword.lower() in n['title'].lower():
             result.append(n)
+            i += 1
         else:
             if keyword.lower() in n['description'].lower():
                 result.append(n)
+                i += 1
 
-    return result
+    output = {'count': i, "result": result}
+
+    return output
